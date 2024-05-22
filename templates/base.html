@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" data-theme="acid">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Page{% endblock %} - QuestionnerGame</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    {% comment %} <div class="flex justify-center dropdown m-3">
+      <div tabindex="0" role="button" class="btn m-1">
+        Theme
+        <svg width="5px" height="5px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+      </div>
+      <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-40">
+        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Smyk" value="cmyk"/></li>
+        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Synthwave" value="synthwave"/></li>
+        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dracula" value="dracula"/></li>
+      </ul>
+    </div> {% endcomment %}
+    {% comment %} {% include "_include_blocks/_nav_block.html" %} {% endcomment %}
+    <div class="container mx-auto">
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
