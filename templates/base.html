@@ -8,18 +8,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    {% comment %} <div class="flex justify-center dropdown m-3">
-      <div tabindex="0" role="button" class="btn m-1">
-        Theme
-        <svg width="5px" height="5px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+
+    {% include "_include_blocks/_nav_block.html" %}
+    {% if messages %}
+    <div class="toast toast-end">
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}}" role="alart">
+        {% if message.tags == 'info' %}
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        {% elif message.tags == 'success' %}
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        {% elif message.tags == 'warning' %}
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+        {% elif message.tags == 'error' %}
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        {% endif %}
+        <span>{{message}}<span>
+        <button class="btn btn-ghost btn-sm btn-circle" onclick="this.parentElement.remove()">X</button>
       </div>
-      <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-40">
-        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Smyk" value="cmyk"/></li>
-        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Synthwave" value="synthwave"/></li>
-        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dracula" value="dracula"/></li>
-      </ul>
-    </div> {% endcomment %}
-    {% comment %} {% include "_include_blocks/_nav_block.html" %} {% endcomment %}
+      {% endfor %}
+    </div>
+    {% endif %}
     <div class="container mx-auto">
       {% block content %}{% endblock %}
     </div>
