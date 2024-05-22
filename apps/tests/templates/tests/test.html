@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Тести{% endblock %}
+
+{% block content %}
+<div class="bg-base-500 mt-5">
+  <h1 class="text-3xl flex justify-center font-serif mt-4">Тести</h1>
+  <div class="grid grid-cols-3 gap-8 mt-8">
+    {% for test in all_tests %}
+    <div class="bg-secondary rounded-box p-5">
+      <h1 class="flex justify-center font-bold">{{test.topic}} від {{test.author}}</h1>
+      <p class="mt-4 text-white">{{test.description}}</p>
+      <p class="mt-4">{{test.created_at}}</p>
+      <hr class="mt-4">
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
