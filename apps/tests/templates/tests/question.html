@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Питання{% endblock %}
+
+{% block content %}
+
+<div class="bg-base-300 mt-4 w-full h-60 flex justify-center items-center p-6 rounded-md shadow-lg">
+  {% if user %}
+    <button class="btn btn-primary mr-4" onclick="create_question.showModal()">Створити питання</button>
+    {% if question.slug %}
+    <form action="{% url 'tests:delete_question' slug=question.slug|default_if_none:'' %}" method="post" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <button class="btn-danger">ВИДАЛИТИ</button>
+    </form>
+    {% endif %}
+    {% else %}
+    <div>
+        <p class="text-lg font-bold">{{ question.text }}?</p>
+        <p class="mt-2">Кількість варіантів відповідей: {{ question.question_type }}</p>
+        {% if question.image %}
+        <img src="{{ question.image.url }}" alt="Question Image" class="mt-4 max-w-full h-auto">
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<dialog id="create_question" class="p-5 rounded-lg shadow-lg">
+    <form action="{% url 'tests:create_question' %}" method="post" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <div class="grid grid-cols-1 gap-6">
+        {% for field in question_form %}
+        <div class="form-control">
+          <label class="label">
+              <span class="label-text">{{ field.label }}</span>
+          </label>
+          {% if field.name == 'content' %}
+          <input type="text" placeholder="Тема" class="input input-bordered w-full max-w-xs" name="{{field.name}}">
+          {% elif field.name == 'author' %}
+          <input type="text" placeholder="Автор" class="input input-bordered w-full max-w-xs" name="{{field.name}}">
+          {% elif field.name == 'image' %}
+            <input type="file" class="file-input w-full max-w-xs" name="{{ field.name }}">
+          {% endif %}
+        </div>
+        {% endfor %}
+        <button class='btn w-80'>Створити</button>
+      </div>
+    </form>
+  </dialog>
+{% endblock %}

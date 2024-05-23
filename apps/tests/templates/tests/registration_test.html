@@ -7,7 +7,11 @@
     <h1 class="flex justify-center items-center text-white font-bold">Реєстрація на тест {{ test.topic }} від {{ test.author }}</h1>
     <form method="post">
       {% csrf_token %}
+      {% if test.author == user %}
+      <button class="btn btn-accent font-bold mt-5">Ввійти в систему</button>
+      {% elif user.is_authenticated %}
       <button class="btn btn-accent font-bold mt-5">Зареєструватися на тест</button>
+      {% endif %}
     </form>
   </div>
 </div>

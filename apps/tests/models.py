@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Test(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='authors_tests', null=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='authors_tests', default=None)
     topic = models.CharField(max_length=20)
     description = models.TextField(max_length=255, blank=True, null=True)
     
@@ -13,19 +13,18 @@ class Test(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.topic
+        return f'{self.topic} - {self.author}'
     
     class Meta:
         ordering=['-created_at']
-    
-    
-class Registration(models.Model):
+        
+        
+class Question(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    content = models.CharField(max_length=250)
     
+    image = models.ImageField(upload_to='question_images/', null=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, verbose_name='URL')
+        
     def __str__(self):
-        return f'Реєстрація на тест {self.test.topic} {self.user.username}'
-    
-    class Meta:
-        verbose_name='Реєстрація',
-        verbose_name_plural='Реєстрації'
+        return self.text
